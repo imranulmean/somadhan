@@ -9,7 +9,7 @@ export default function App() {
   return (
     <BrowserRouter>
     <Header />
-      <div className="pl-[5.5rem] pr-[5.5rem] my-2 lg:pl-[12.5rem] lg:pr-[12.5rem] ">
+      <div className="">
         <Routes>
           <Route path='/sign-in' element={<SignIn />} />
           {/* <Route element={<PrivateRoute />}> */}

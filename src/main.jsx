@@ -21,7 +21,11 @@ import keycloak from './keycloak'
 // );
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <ReactKeycloakProvider authClient={keycloak}>
+  <ReactKeycloakProvider authClient={keycloak}>
+    <PersistGate persistor={persistor}>
+      <Provider store={store}>
         <App />
-  //  {/* </ReactKeycloakProvider> */}
+      </Provider>
+    </PersistGate>        
+  </ReactKeycloakProvider>
 );

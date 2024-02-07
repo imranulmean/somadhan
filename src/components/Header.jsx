@@ -5,7 +5,15 @@ import { FaMoon, FaSun, FaBell } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
 export default function Header() {
- 
+  const path = useLocation().pathname;
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  const menuClicked=(param)=>{
+    console.log('menuClicked');
+    navigate(param);
+  }
+
   return (
     <Navbar className='border-b-2'>
         <Link
@@ -16,7 +24,35 @@ export default function Header() {
             Somadhan
             </span>
             Center
-        </Link>        
+        </Link>
+        {/* <form>
+        <TextInput
+          type='text'
+          placeholder='Search...'
+          rightIcon={AiOutlineSearch}
+          className='inline'
+        />
+      </form>              */}
+      {/* <Button className='w-12 h-10 lg:hidden' color='gray' pill>
+        <AiOutlineSearch />
+      </Button> */}
+      <div className="flex md:order-2">
+        <Dropdown
+          arrowIcon={false}
+          inline
+          label={
+            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+          }
+        >
+          <Dropdown.Header>
+            <span className="block text-sm">Bonnie Green</span>
+            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+          </Dropdown.Header>
+          <Dropdown.Item onClick={()=>menuClicked('/profile')}>Profile</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item>Sign out</Dropdown.Item>
+        </Dropdown>
+      </div>     
      </Navbar>   
     
   );

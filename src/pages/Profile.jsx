@@ -1,40 +1,26 @@
 import { Card  } from 'flowbite-react';
-import { useState } from 'react';
-import { Button, Modal } from 'flowbite-react';
-import { Checkbox, Label, TextInput, Textarea } from 'flowbite-react';
+import { useState, useRef, useEffect } from 'react';
+import { Button } from 'flowbite-react';
+import { useKeycloak } from '@react-keycloak/web';
+import { EditDetailsModal } from '../modals/EditDetailsModal.jsx';
+import { EditImageModal } from '../modals/EditImageModal.jsx';
 
 export default function Profile() {
-
     const [openModal, setOpenModal]=useState(false);
-    const[email, setEmail]= useState("abx@gmail.com");
-    const [formData, setFormData]= useState({});
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
-      };
-
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
-        console.log(formData);
-
-        return;
-        const url="";
-        const res= await fetch(url,{
-            method:"POST",
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        });
-         const data = await res.json();
-    }  
+    const [openImageModal, setOpenImageModal]=useState(false);
+    const [profilePic, setProfilePic]=useState("https://flowbite.com/docs/images/people/profile-picture-5.jpg");
+    const [coverPic, setCoverPic]= useState("https://media.licdn.com/dms/image/D5616AQEM-_hT5pN5eA/profile-displaybackgroundimage-shrink_350_1400/0/1703782815010?e=1712793600&v=beta&t=7CSE0TD-9bGzpScR4aKFvCOrTzB19itFTP31SH80sDA");
+    // sid: "e7228f52-b256-41cc-b0f9-1e3f6dc1a2b1"
+    
     return (
         <>
             <Card className='w-full'>
                 <img src={"https://media.licdn.com/dms/image/D5616AQEM-_hT5pN5eA/profile-displaybackgroundimage-shrink_350_1400/0/1703782815010?e=1712793600&v=beta&t=7CSE0TD-9bGzpScR4aKFvCOrTzB19itFTP31SH80sDA"}/>
                 <div className="flex h-full flex gap-4 p-6">
-                    <div className='flex-1 mt-[-100px]'>                    
-                        <img class="rounded-full border border-white w-auto h-24" src={"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} />
+                    <div className='flex-1 mt-[-100px]'>                        
+                            <img onClick={()=>setOpenImageModal(true)} class="rounded-full border border-white w-auto h-24" 
+                                src={profilePic} />                           
+                        
                         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Profile Name
                         </h5>
@@ -57,63 +43,9 @@ export default function Profile() {
                      
                     </div>                    
                 </div>
-                <Modal show={openModal} onClose={() => setOpenModal(false)}>
-                    <Modal.Header>Edit Bio</Modal.Header>
-                    <Modal.Body>
-                        <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-4">
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="email1" value="Your email" />
-                                </div>
-                                <TextInput disabled readOnly defaultValue={email} id="email" type="email" placeholder="name@flowbite.com" required />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="firstName" value="First Name" />
-                                </div>
-                                <TextInput id="firstName" type="text" />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="lastName" value="Last Name" />
-                                </div>
-                                <TextInput id="lastName" type="text" />
-                            </div>                            
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="expertise" value="Your Expertise" />
-                                </div>
-                                <TextInput id="Expertise" type="text" />
-                            </div> 
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="organizations" value="Organizations" />
-                                </div>
-                                <TextInput id="organizations" type="text" />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="role" value="Job Role" />
-                                </div>
-                                <TextInput id="role" type="text" />
-                            </div>                            
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="education" value="Education" />
-                                </div>
-                                <TextInput id="education" type="text" />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="about" value="About" />
-                                </div>
-                                <Textarea id="about" className='mb-2' maxLength='200' onChange={handleChange} />
-                                <p className='text-gray-500 text-xs'>200 Char reamining</p>                                
-                            </div>                                                                          
-                            <Button type="submit" >Submit</Button>
-                        </form>
-                    </Modal.Body>
-                </Modal>                               
+                    <EditDetailsModal openModal={openModal} setOpenModal={setOpenModal}/>
+                    <EditImageModal openImageModal={openImageModal} setOpenImageModal={setOpenImageModal} 
+                                    profilePic={profilePic} coverPic={coverPic} />
                
             </Card>
             <Card className='w-full'>               

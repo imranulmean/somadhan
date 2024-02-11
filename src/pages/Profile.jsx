@@ -4,14 +4,43 @@ import { Button } from 'flowbite-react';
 import { useKeycloak } from '@react-keycloak/web';
 import { EditDetailsModal } from '../modals/EditDetailsModal.jsx';
 import { EditImageModal } from '../modals/EditImageModal.jsx';
+import { EditEducationModal } from '../modals/EditEducationModal.jsx';
+import { EditExperienceModal } from '../modals/EditExperience.jsx';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Profile() {
     const [openModal, setOpenModal]=useState(false);
     const [openImageModal, setOpenImageModal]=useState(false);
+    const [openEducationModal, setOpenEducationModal]= useState(false);
+    const [openExpModal, setOpenExpModal]= useState(false);
     const [profilePic, setProfilePic]=useState("https://flowbite.com/docs/images/people/profile-picture-5.jpg");
     const [coverPic, setCoverPic]= useState("https://media.licdn.com/dms/image/D5616AQEM-_hT5pN5eA/profile-displaybackgroundimage-shrink_350_1400/0/1703782815010?e=1712793600&v=beta&t=7CSE0TD-9bGzpScR4aKFvCOrTzB19itFTP31SH80sDA");
-    // sid: "e7228f52-b256-41cc-b0f9-1e3f6dc1a2b1"
-    
+    const { userId } = useParams();
+    const [edu, setEdu]=useState(null);
+    const [exp, setExp]= useState(null);
+
+    useEffect(()=>{
+        const fetchExp=async ()=>{
+            const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_experiences?user_id=eq.${userId}`);
+            const data=await res.json();        
+            setExp(data[0]);
+        }
+        const fetchEdu=async ()=>{
+            const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_educations?user_id=eq.${userId}`);
+            const data=await res.json();
+            setEdu(data[data.length-1]);
+        }        
+        fetchExp();
+        fetchEdu();
+    },[])
+    const formatDate=(dateString,objName)=>{
+        const formattedDate = dateString.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
+        return formattedDate;
+    }
     return (
         <>
             <Card className='w-full'>
@@ -41,7 +70,7 @@ export default function Profile() {
                             </svg>
                         </Button>
                      
-                    </div>                    
+                    </div>                  
                 </div>
                     <EditDetailsModal openModal={openModal} setOpenModal={setOpenModal}/>
                     <EditImageModal openImageModal={openImageModal} setOpenImageModal={setOpenImageModal} 
@@ -72,15 +101,24 @@ export default function Profile() {
                             Experiences
                         </h6>
                         <p className="font-normal text-1xl text-gray-700 dark:text-gray-400">
-                            Software Developer
+                            {exp?.title}, {exp?.company_name}
                         </p>
                         <p className="font-normal text-1xl text-gray-500 dark:text-gray-400">
-                            FunnelEnvy · Full-time
-                            Mar 2016 - Present · 8 yrsMar 2016 - Present · 8 yrs
-                            Dhaka, Bangladesh · Remote                            
+                            {exp?.start_date} to {exp?.end_date}
                         </p>
-                        </div>
+                        <p className="font-normal text-1xl text-gray-500 dark:text-gray-400">
+                            {exp?.location}
+                        </p>
+                    </div>
+                    <div>
+                        <Button onClick={() => setOpenExpModal(true)} color="grey" size="xs">
+                            <svg class="w-6 h-6 text-gray-800 hover:pointer dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
+                            </svg>
+                        </Button>                     
+                    </div>                     
                 </div>
+                <EditExperienceModal openModal={openExpModal} setOpenModal={setOpenExpModal}/>
             </Card>            
             <Card className='w-full'>               
                 <div className="flex h-full flex gap-4 p-6">
@@ -89,17 +127,25 @@ export default function Profile() {
                             Education
                         </h6>
                         <p className="font-normal text-1xl text-gray-500 dark:text-gray-400">
-                            East West University                                            
+                            {edu?.institution_name}                                      
                         </p>
 
                          <p className="font-normal text-1xl text-gray-500 dark:text-gray-400">
-                            Computer Science and Engineering                            
+                            {edu?.degree} in {edu?.field_of_study}                   
                          </p>
                          <p className="font-normal text-xs text-gray-500 dark:text-gray-400">
-                            2010-2014
+                           {edu?.start_date} to {edu?.end_date}
                          </p>
-                        </div>
+                    </div>
+                    <div>
+                        <Button onClick={() => setOpenEducationModal(true)} color="grey" size="xs">
+                            <svg class="w-6 h-6 text-gray-800 hover:pointer dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
+                            </svg>
+                        </Button>                     
+                    </div>                    
                 </div>
+                <EditEducationModal openModal={openEducationModal} setOpenModal={setOpenEducationModal}/>
             </Card>                             
         </>
 

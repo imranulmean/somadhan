@@ -49,7 +49,7 @@ export default function Header() {
             <span className="block text-sm">Bonnie Green</span>
             <span className="block truncate text-sm font-medium">name@flowbite.com</span>
           </Dropdown.Header>
-          <Dropdown.Item onClick={()=>menuClicked('/profile')}>Profile</Dropdown.Item>
+          <Dropdown.Item onClick={()=>menuClicked(`/profile/${keycloak.subject}`)}>Profile</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item onClick={()=>keycloak.logout()}>Sign out</Dropdown.Item>
         </Dropdown>

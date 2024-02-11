@@ -17,24 +17,29 @@ export const EditDetailsModal = ({openModal, setOpenModal}) => {
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        console.log(keycloak.tokenParsed.sid);
+        console.log(keycloak.subject)
+
+        // console.log(keycloak.tokenParsed.sid);
         console.log(keycloak.token);
-        let expertise = formData.expertise;
-        let modifiedExpertise = expertise.replace(/\s*,\s*/g, ',');
-        let expertiseArray = modifiedExpertise.split(',');
+        // let expertise = formData.expertise;
+        // let modifiedExpertise = expertise.replace(/\s*,\s*/g, ',');
+        // let expertiseArray = modifiedExpertise.split(',');
         // setFormData({...formData, ['expertiseArray'] :  expertiseArray});
-        formData['expertiseArray'] =  expertiseArray;
+        // formData['expertiseArray'] =  expertiseArray;
+        formData['id']=keycloak.subject;
         console.log(formData);
-        return;
-        const url="";
+        
+        const url=`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${keycloak.subject}`;
         const res= await fetch(url,{
-            method:"POST",
+            method:"PUT",
             headers:{
                 'Content-Type': 'application/json',
+                "Authorization": `Beaerer ${keycloak.token}`
             },
             body: JSON.stringify(formData)
         });
          const data = await res.json();
+         console.log(data);
     } 
 
   return (
@@ -52,15 +57,15 @@ export const EditDetailsModal = ({openModal, setOpenModal}) => {
                         <div className="mb-2 block">
                         <Label htmlFor="firstName" value="First Name" />
                         </div>
-                        <TextInput id="firstName" type="text" onChange={handleChange} />
+                        <TextInput id="first_name" type="text" onChange={handleChange} />
                     </div>
                     <div>
                         <div className="mb-2 block">
-                        <Label htmlFor="lastName" value="Last Name" />
+                        <Label htmlFor="last_name" value="Last Name" />
                         </div>
-                        <TextInput id="lastName" type="text" onChange={handleChange} />
+                        <TextInput id="last_name" type="text" onChange={handleChange} />
                     </div>                            
-                    <div>
+                    {/* <div>
                         <div className="mb-2 block">
                         <Label htmlFor="expertise" value="Your Expertise Seperated By Comma(,)" />
                         </div>
@@ -83,7 +88,7 @@ export const EditDetailsModal = ({openModal, setOpenModal}) => {
                         <Label htmlFor="education" value="Education" />
                         </div>
                         <TextInput id="education" type="text" onChange={handleChange} />
-                    </div>
+                    </div> */}
                     <div>
                         <div className="mb-2 block">
                             <Label htmlFor="about" value="About" />

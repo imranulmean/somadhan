@@ -1,8 +1,17 @@
 import { Button } from 'flowbite-react';
 import { useKeycloak } from '@react-keycloak/web';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function SignIn() {
   const { keycloak, initialized } = useKeycloak();
+  const navigate= useNavigate();
+
+  useEffect(()=>{
+    if(keycloak.authenticated){
+      navigate('/');
+    }
+  },[keycloak.authenticated])
 
   return (
       <div className='flex h-screen justify-center items-center'>

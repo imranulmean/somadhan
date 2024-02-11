@@ -3,14 +3,15 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon, FaSun, FaBell } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
+import { useKeycloak } from '@react-keycloak/web';
 
 export default function Header() {
   const path = useLocation().pathname;
   const location = useLocation();
   const navigate = useNavigate();
-  
+  const { keycloak, initialized } = useKeycloak();
+
   const menuClicked=(param)=>{
-    console.log('menuClicked');
     navigate(param);
   }
 
@@ -50,7 +51,7 @@ export default function Header() {
           </Dropdown.Header>
           <Dropdown.Item onClick={()=>menuClicked('/profile')}>Profile</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={()=>keycloak.logout()}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>     
      </Navbar>   

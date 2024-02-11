@@ -20,20 +20,30 @@ export default function Profile() {
     const [exp, setExp]= useState(null);
 
     useEffect(()=>{
+
+        const fetchUserProfile=async ()=>{
+            const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${userId}`);
+            const data=await res.json();
+            console.log(data[0]);
+        }
+        
         const fetchExp=async ()=>{
             const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_experiences?user_id=eq.${userId}`);
-            const data=await res.json();        
-            setExp(data[0]);
+            const data=await res.json();
+            if(data.length>0)
+            setExp(data[data.length-1]);
         }
         const fetchEdu=async ()=>{
             const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_educations?user_id=eq.${userId}`);
             const data=await res.json();
+            if(data.length>0)
             setEdu(data[data.length-1]);
-        }        
+        }
+        fetchUserProfile();   
         fetchExp();
         fetchEdu();
     },[])
-    const formatDate=(dateString,objName)=>{
+    const formatDate=(dateString)=>{
         const formattedDate = dateString.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',

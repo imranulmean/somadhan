@@ -16,6 +16,7 @@ export default function Header() {
     navigate(param);
   }
   useEffect(()=>{
+    console.log(keycloak);
       const fetchUserProfile=async ()=>{
         const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${keycloak.subject}`);
         const data=await res.json();
@@ -23,7 +24,7 @@ export default function Header() {
         setUserProfile(data[0]);
     }    
     fetchUserProfile();
-  },[]);
+  },[keycloak.authenticated]);
 
   return (
     <Navbar className='border-b-2'>

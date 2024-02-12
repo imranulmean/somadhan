@@ -16,15 +16,16 @@ export default function Profile() {
     const [profilePic, setProfilePic]=useState("https://flowbite.com/docs/images/people/profile-picture-5.jpg");
     const [coverPic, setCoverPic]= useState("https://media.licdn.com/dms/image/D5616AQEM-_hT5pN5eA/profile-displaybackgroundimage-shrink_350_1400/0/1703782815010?e=1712793600&v=beta&t=7CSE0TD-9bGzpScR4aKFvCOrTzB19itFTP31SH80sDA");
     const { userId } = useParams();
+    const [userProfile, setUserProfile]= useState(null);
     const [edu, setEdu]=useState(null);
     const [exp, setExp]= useState(null);
 
     useEffect(()=>{
-
         const fetchUserProfile=async ()=>{
             const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${userId}`);
             const data=await res.json();
             console.log(data[0]);
+            setUserProfile(data[0]);
         }
         
         const fetchExp=async ()=>{
@@ -55,22 +56,22 @@ export default function Profile() {
         <>
             <Card className='w-full'>
                 <img src={"https://media.licdn.com/dms/image/D5616AQEM-_hT5pN5eA/profile-displaybackgroundimage-shrink_350_1400/0/1703782815010?e=1712793600&v=beta&t=7CSE0TD-9bGzpScR4aKFvCOrTzB19itFTP31SH80sDA"}/>
-                <div className="flex h-full flex gap-4 p-6">
+                <div className="flex h-full flex gap-4 p-3">
                     <div className='flex-1 mt-[-100px]'>                        
                             <img onClick={()=>setOpenImageModal(true)} class="rounded-full border border-white w-auto h-24" 
                                 src={profilePic} />                           
                         
                         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            Profile Name
+                            {userProfile?.first_name}{" "}{userProfile?.last_name}
                         </h5>
                         <p className="font-normal text-1xl text-gray-700 dark:text-gray-400">
-                            Expertice
+                            {userProfile?.title}
                         </p>
                         <p className="font-normal text-1xl text-gray-500 dark:text-gray-400">
-                            Working Organizations . Schools
+                        {exp?.company_name} . {edu?.institution_name}
                         </p>                  
                         <p className="font-normal text-1xl text-gray-500 dark:text-gray-400">
-                            Address
+                            {userProfile?.location}
                         </p>
                     </div>
                     <div>
@@ -88,24 +89,20 @@ export default function Profile() {
                
             </Card>
             <Card className='w-full'>               
-                <div className="flex h-full flex gap-4 p-6">
+                <div className="flex h-full flex gap-4 p-3">
                     <div className='flex-1'>
                         <h6 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             About
                         </h6>
                         <p className="font-normal text-1xl text-gray-700 dark:text-gray-400">
-                            🚀 Passionate and Self-Taught Software Engineer | AWS Enthusiast | Innovative Web Developer
-                            👋 Hello, I'm Md. Imranul Hasan, a seasoned software engineer with over a decade of hands-on experience in the dynamic world of web development. I thrive on embracing new technologies and have cultivated a strong proficiency in Node.js, JavaScript, TypeScript, and a diverse range of frameworks and tools.
-                            🚀 Skills:
-                            Expert in Node.js, JavaScript, TypeScript, Java, HTML5, CSS3, and more.
-                            Strong background in cloud technologies, particularly AWS (Lambda, Apigateway, SQS, SNS, S3, DynamoDB, Cognito).                            
+                            {userProfile?.about}
                         </p>
 
                         </div>
                 </div>
             </Card>
             <Card className='w-full'>               
-                <div className="flex h-full flex gap-4 p-6">
+                <div className="flex h-full flex gap-4 p-3">
                     <div className='flex-1'>
                         <h6 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Experiences
@@ -131,7 +128,7 @@ export default function Profile() {
                 <EditExperienceModal openModal={openExpModal} setOpenModal={setOpenExpModal}/>
             </Card>            
             <Card className='w-full'>               
-                <div className="flex h-full flex gap-4 p-6">
+                <div className="flex h-full flex gap-4 p-3">
                     <div className='flex-1'>
                         <h6 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Education

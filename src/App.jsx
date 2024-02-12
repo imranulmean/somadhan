@@ -12,10 +12,10 @@ export default function App() {
       <div className="">
         <Routes>
           <Route path='/signin' element={<SignIn />} />
-          {/* <Route element={<PrivateRoute />}> */}
-            <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route element={<PrivateRoute />}>
             <Route path='/profile/:userId' element={<Profile />} />
-          {/* </Route> */}
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

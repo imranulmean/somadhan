@@ -21,10 +21,9 @@ export default function Header() {
             to='/'
             className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
         >
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-            Somadhan
-            </span>
-            Center
+            <span className='px-2 py-1 bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 rounded-lg text-white'>
+            Somadhan 
+            </span>            
         </Link>
         {/* <form>
         <TextInput
@@ -37,22 +36,32 @@ export default function Header() {
       {/* <Button className='w-12 h-10 lg:hidden' color='gray' pill>
         <AiOutlineSearch />
       </Button> */}
+    
       <div className="flex md:order-2">
-        <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
-          }
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
-          </Dropdown.Header>
-          <Dropdown.Item onClick={()=>menuClicked(`/profile/${keycloak.subject}`)}>Profile</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item onClick={()=>keycloak.logout()}>Sign out</Dropdown.Item>
-        </Dropdown>
+        {
+          keycloak.authenticated ? 
+            <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">Bonnie Green</span>
+              <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+            </Dropdown.Header>
+            <Dropdown.Item onClick={()=>menuClicked(`/profile/${keycloak.subject}`)}>Profile</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={()=>keycloak.logout()}>Sign out</Dropdown.Item>
+          </Dropdown>
+          :
+          <Button onClick={()=>keycloak.login()} className="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-sm text-sm px-1 py-1 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30">
+            Login
+          </Button>
+        }
+
+
       </div>     
      </Navbar>   
     

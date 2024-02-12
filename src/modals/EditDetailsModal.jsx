@@ -17,18 +17,9 @@ export const EditDetailsModal = ({openModal, setOpenModal}) => {
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        console.log(keycloak.subject)
-
-        // console.log(keycloak.tokenParsed.sid);
-        console.log(keycloak.token);
-        // let expertise = formData.expertise;
-        // let modifiedExpertise = expertise.replace(/\s*,\s*/g, ',');
-        // let expertiseArray = modifiedExpertise.split(',');
-        // setFormData({...formData, ['expertiseArray'] :  expertiseArray});
-        // formData['expertiseArray'] =  expertiseArray;
+        console.log(keycloak.subject);
         formData['id']=keycloak.subject;
         console.log(formData);
-        
         const url=`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${keycloak.subject}`;
         const res= await fetch(url,{
             method:"PUT",
@@ -38,8 +29,6 @@ export const EditDetailsModal = ({openModal, setOpenModal}) => {
             },
             body: JSON.stringify(formData)
         });
-         const data = await res.json();
-         console.log(data);
     } 
 
   return (
@@ -65,30 +54,24 @@ export const EditDetailsModal = ({openModal, setOpenModal}) => {
                         </div>
                         <TextInput id="last_name" type="text" onChange={handleChange} />
                     </div>                            
-                    {/* <div>
+                    <div>
                         <div className="mb-2 block">
-                        <Label htmlFor="expertise" value="Your Expertise Seperated By Comma(,)" />
+                        <Label htmlFor="title" value="title"/>
                         </div>
-                        <TextInput id="expertise" type="text" onChange={handleChange} />
+                        <TextInput id="title" type="text" onChange={handleChange} />
                     </div> 
                     <div>
                         <div className="mb-2 block">
-                        <Label htmlFor="organizations" value="Organizations" />
+                        <Label htmlFor="phone_number" value="phone_number" />
                         </div>
-                        <TextInput id="organizations" type="text" onChange={handleChange} />
+                        <TextInput id="phone_number" type="text" onChange={handleChange} />
                     </div>
                     <div>
                         <div className="mb-2 block">
-                        <Label htmlFor="role" value="Job Role" />
+                        <Label htmlFor="location" value="location" />
                         </div>
-                        <TextInput id="role" type="text" onChange={handleChange} />
-                    </div>                            
-                    <div>
-                        <div className="mb-2 block">
-                        <Label htmlFor="education" value="Education" />
-                        </div>
-                        <TextInput id="education" type="text" onChange={handleChange} />
-                    </div> */}
+                        <TextInput id="location" type="text" onChange={handleChange} />
+                    </div>
                     <div>
                         <div className="mb-2 block">
                             <Label htmlFor="about" value="About" />

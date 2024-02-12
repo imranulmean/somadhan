@@ -24,7 +24,6 @@ export default function Profile() {
         const fetchUserProfile=async ()=>{
             const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${userId}`);
             const data=await res.json();
-            console.log(data[0]);
             setUserProfile(data[0]);
         }
         

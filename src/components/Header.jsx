@@ -10,10 +10,20 @@ export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const { keycloak, initialized } = useKeycloak();
+  const [userProfile, setUserProfile]= useState(null);
 
   const menuClicked=(param)=>{
     navigate(param);
   }
+  useEffect(()=>{
+      const fetchUserProfile=async ()=>{
+        const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${keycloak.subject}`);
+        const data=await res.json();
+        console.log(data[0]);
+        setUserProfile(data[0]);
+    }    
+    fetchUserProfile();
+  },[]);
 
   return (
     <Navbar className='border-b-2'>
@@ -48,8 +58,8 @@ export default function Header() {
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+              <span className="block text-sm">{userProfile?.first_name}{" "}{userProfile?.last_name}</span>
+              <span className="block truncate text-sm font-medium">{userProfile?.title}</span>
             </Dropdown.Header>
             <Dropdown.Item onClick={()=>menuClicked(`/profile/${keycloak.subject}`)}>Profile</Dropdown.Item>
             <Dropdown.Divider />

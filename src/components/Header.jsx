@@ -11,12 +11,13 @@ export default function Header() {
   const navigate = useNavigate();
   const { keycloak, initialized } = useKeycloak();
   const [userProfile, setUserProfile]= useState(null);
-
+  console.log(location);
   const menuClicked=(param)=>{
     navigate(param);
   }
+
   useEffect(()=>{
-    console.log(keycloak);
+    
       const fetchUserProfile=async ()=>{
         const res= await fetch(`https://api-24f4009b4204.edgeflare.io/user_profiles?id=eq.${keycloak.subject}`);
         const data=await res.json();
@@ -27,7 +28,7 @@ export default function Header() {
   },[keycloak.authenticated]);
 
   return (
-    <Navbar className='border-b-2'>
+    <Navbar className={`border-b-2 border-none ${location.pathname==="/" ? "bg-black" : ""}`}>
         <Link
             to='/'
             className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'

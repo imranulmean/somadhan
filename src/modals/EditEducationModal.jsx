@@ -5,7 +5,7 @@ import { Checkbox, Label, TextInput, Textarea } from 'flowbite-react';
 import { useKeycloak } from '@react-keycloak/web';
 import { Datepicker } from 'flowbite-react';
 
-export const EditEducationModal = ({openModal, setOpenModal}) => {
+export const EditEducationModal = ({openModal, setOpenModal, callback}) => {
 
     const { keycloak, initialized } = useKeycloak();
     const[email, setEmail]= useState("abx@gmail.com");
@@ -34,7 +34,9 @@ export const EditEducationModal = ({openModal, setOpenModal}) => {
                     "Authorization": `Beaerer ${keycloak.token}`
                 },
                 body: JSON.stringify(formData)
-            });            
+            });
+            callback(); 
+            setOpenModal(false)       
         } catch (error) {
             alert(error);
         }

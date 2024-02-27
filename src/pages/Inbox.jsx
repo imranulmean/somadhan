@@ -20,7 +20,7 @@ export default function Inbox(){
     return(
         <>
          <h5 className="text-1xl text-center font-bold tracking-tight text-gray-900 dark:text-white mb-3">Inbox</h5>
-         <h5 className="text-sm text-center font-normal tracking-tight text-gray-500 dark:text-white mb-3">My Questions</h5>
+         <h5 className="text-sm font-bold tracking-tight dark:text-white mb-3 px-3">My Questions</h5>
          <Card className="w-full">
             <div className="flow-root">
                 <ul className="divide-y divide-gray-200 dark:divide-gray-700">

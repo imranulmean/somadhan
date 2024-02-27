@@ -24,8 +24,8 @@ export default function Experts(){
 
     return (
         <Card className="full-width">
-          <div className="mb-4 flex items-center justify-between">
-            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Favourite Experts</h5>
+          <div className="flex items-center justify-center">
+            <h5 className="text-center text-xl font-bold leading-none text-gray-900 dark:text-white">Favourite Experts</h5>
           </div>
           <div className="flow-root">
             <ul className="divide-y divide-gray-200 dark:divide-gray-700">

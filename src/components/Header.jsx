@@ -36,10 +36,22 @@ export default function Header() {
             </span>
         </Link>
         <Link to='/inbox' className={`${path.includes('inbox') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
-            <span>Inbox</span>            
+            <span>
+             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M4 3a1 1 0 0 0-1 1v8c0 .6.4 1 1 1h1v2a1 1 0 0 0 1.7.7L9.4 13H15c.6 0 1-.4 1-1V4c0-.6-.4-1-1-1H4Z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M8 17.2h.1l2.1-2.2H15a3 3 0 0 0 3-3V8h2c.6 0 1 .4 1 1v8c0 .6-.4 1-1 1h-1v2a1 1 0 0 1-1.7.7L14.6 18H9a1 1 0 0 1-1-.8Z" clip-rule="evenodd"/>
+              </svg>
+              
+              Inbox
+            </span>            
         </Link>
         <Link to='/askNow' className={`${path.includes('askNow') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
-            <span>Ask Now</span>            
+            <span>
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm9-3a1.5 1.5 0 0 1 2.5 1.1 1.4 1.4 0 0 1-1.5 1.5 1 1 0 0 0-1 1V14a1 1 0 1 0 2 0v-.5a3.4 3.4 0 0 0 2.5-3.3 3.5 3.5 0 0 0-7-.3 1 1 0 0 0 2 .1c0-.4.2-.7.5-1Zm1 7a1 1 0 1 0 0 2 1 1 0 1 0 0-2Z" clip-rule="evenodd"/>
+              </svg>                
+              Ask Now
+            </span>            
         </Link>
         <Link to='/experts' className={`${path.includes('experts') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
             <span>Experts</span>            

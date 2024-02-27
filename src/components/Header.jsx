@@ -28,15 +28,22 @@ export default function Header() {
   },[keycloak.authenticated]);
 
   return (
-    <Navbar className={`border-b-2 border-none ${location.pathname==="/" ? "bg-black" : ""}`}>
-        <Link
-            to='/'
-            className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
-        >
+    // <Navbar className={`border-b-2 border-none ${location.pathname==="/" ? "bg-black" : ""}`}>
+    <Navbar className='border-b-2'>
+        <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
             <span className='px-2 py-1 bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 rounded-lg text-white'>
             Somadhan 
-            </span>            
+            </span>
         </Link>
+        <Link to='/inbox' className={`${path.includes('inbox') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
+            <span>Inbox</span>            
+        </Link>
+        <Link to='/askNow' className={`${path.includes('askNow') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
+            <span>Ask Now</span>            
+        </Link>
+        <Link to='/experts' className={`${path.includes('experts') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
+            <span>Experts</span>            
+        </Link>                       
         {/* <form>
         <TextInput
           type='text'
@@ -65,6 +72,14 @@ export default function Header() {
             </Dropdown.Header>
             <Dropdown.Item onClick={()=>menuClicked(`/profile/${keycloak.subject}`)}>Profile</Dropdown.Item>
             <Dropdown.Divider />
+            <Dropdown.Item>My Benifits</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item>Privacy Policy</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item >How it Works</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item >Send Feedback</Dropdown.Item>
+            <Dropdown.Divider />                                    
             <Dropdown.Item onClick={()=>keycloak.logout()}>Sign out</Dropdown.Item>
           </Dropdown>
           :
@@ -72,10 +87,8 @@ export default function Header() {
             Login
           </Button>
         }
-
-
-      </div>     
-     </Navbar>   
+      </div>          
+    </Navbar>   
     
   );
 }

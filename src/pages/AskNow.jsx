@@ -23,7 +23,7 @@ export default function AskNow() {
     </div>
       <div className="relative">
         <textarea className="w-full px-3 py-2 border rounded-md h-[400px]" placeholder="Type here..."></textarea>
-        <div className="absolute bottom-[50px]" onClick={() => filePickerRef.current.click()}>
+        <div className="absolute bottom-[50px] left-[5px]" onClick={() => filePickerRef.current.click()}>
         <input
           type='file'
           accept='image/*'

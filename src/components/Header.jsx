@@ -12,6 +12,7 @@ export default function Header() {
   const { keycloak, initialized } = useKeycloak();
   const [userProfile, setUserProfile]= useState(null);
   console.log(location);
+  console.log(keycloak.authenticated);
   const menuClicked=(param)=>{
     navigate(param);
   }

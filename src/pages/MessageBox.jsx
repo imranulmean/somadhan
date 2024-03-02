@@ -37,9 +37,8 @@ export default function MessageBox(){
                             <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-400">How can I help You Sir?</p>
                         </li>
                         <li className="flex py-3 sm:py-4">
-                            <div className="flex items-end ml-auto">
+                            <div className="ml-auto flex flex-col items-end">
                                 <div className="text-base font-semibold text-gray-900 dark:text-white">
-                                    <div className="shrink-0">
                                         <img
                                             alt="Bonnie image"
                                             height="32"
@@ -47,9 +46,10 @@ export default function MessageBox(){
                                             width="32"
                                             className="rounded-full"
                                         />
-                                    </div>
-                                    <p className='truncate text-sm font-medium text-gray-900 dark:text-gray-400'>I need Help For programming</p>
                                 </div>
+                                <div>
+                                    <p className='text-wrap truncate text-sm font-medium text-gray-900 dark:text-gray-400'>I want to learn about the lawyer program</p>
+                                </div>                                
                             </div>
                         </li>
                         {/* /////////////////////////////         */}
@@ -68,9 +68,8 @@ export default function MessageBox(){
                             <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-400">I can recommend you some tutorials and courses</p>
                         </li>
                         <li className="flex py-3 sm:py-4">
-                            <div className="ml-auto flex items-end">
+                            <div className="ml-auto flex flex-col items-end">
                                 <div className="text-base font-semibold text-gray-900 dark:text-white">
-                                    <div className="shrink-0">
                                         <img
                                             alt="Bonnie image"
                                             height="32"
@@ -78,9 +77,10 @@ export default function MessageBox(){
                                             width="32"
                                             className="rounded-full"
                                         />
-                                    </div>
-                                    <p className='text-wrap truncate text-sm font-medium text-gray-900 dark:text-gray-400'>Lets Try those things Thanks for your help</p>
                                 </div>
+                                <div>
+                                    <p className='text-wrap truncate text-sm font-medium text-gray-900 dark:text-gray-400'>Lets Try those things Thanks for your help</p>
+                                </div>                                
                             </div>
                         </li>                         
                     </ul>

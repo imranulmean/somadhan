@@ -47,6 +47,7 @@ export default function InboxComponent({inbox }){
         
             </li>
             </ul>
+            
         </div>
         </Card>
     )

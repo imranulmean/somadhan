@@ -18,6 +18,29 @@ export default function Home() {
         {name:"Lana Byrd", post:"Lawyer", profilePic:"https://www.flowbite-react.com/_next/image?url=%2Fimages%2Fpeople%2Fprofile-picture-4.jpg&w=32&q=75", ratings:[1,2,3,4], reviews:'25,000', filled:true},
         {name:"Thomes Lean", post:"Lawyer", profilePic:"https://www.flowbite-react.com/_next/image?url=%2Fimages%2Fpeople%2Fprofile-picture-5.jpg&w=32&q=75", ratings:[1,2,3,4], reviews:'5,000', filled:false},
     ];
+
+    const sendReq = async()=>{
+       const profile= {
+            "id": 1,
+            "name": "A Martinez",
+            "description": "Adolph Larrue Martinez III.",
+            "mbti": "ISFJ",
+            "enneagram": "9w3",
+            "variant": "sp/so",
+            "tritype": 725,
+            "socionics": "SEE",
+            "sloan": "RCOEN",
+            "psyche": "FEVL",
+            "image": "https://soulverse.boo.world/images/1.png",
+          }        
+        await fetch('http://localhost:3000/createProfile',{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(profile)
+        })
+    }
     return (
         // <section className="top-0 h-screen flex items-center bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply" style={{ marginTop: '-4rem', zIndex: '0' }}>
     //     <section className="top-0 h-screen flex items-center bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
@@ -28,6 +51,7 @@ export default function Home() {
     //   </section>
         <>
         <h3 className='text-black text-md font-bold  p-2'>My Questions</h3>
+        <button onClick={sendReq}>Send</button>
             <Card className="full-width mb-10">
                 <div className="flow-root">
                     <ul className="divide-y divide-gray-200 dark:divide-gray-700">

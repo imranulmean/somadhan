@@ -117,21 +117,21 @@ export default function Experts(){
 
             </ul>
           </div>
-          <Modal show={openModal} onClose={() => setOpenModal(false)}>
-            <Modal.Header>Ask Question</Modal.Header>
-            <Modal.Body>
-                <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-4">                   
-                    <div>
-                        <div className="mb-2 block">
-                            <Label htmlFor="about" value="Query" />
-                        </div>
-                        <Textarea id="about" className='mb-2' maxLength='200' />
-                        <p className='text-gray-500 text-xs'>200 Char reamining</p>                                
-                    </div>                                                                          
-                    <Button type="submit" >Send</Button>
-                </form>
-            </Modal.Body>
-        </Modal>           
+            <Modal show={openModal} onClose={() => setOpenModal(false)}>
+                <Modal.Header>Ask Question</Modal.Header>
+                <Modal.Body>
+                    <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-4">                   
+                        <div>
+                            <div className="mb-2 block">
+                                <Label htmlFor="about" value="Query" />
+                            </div>
+                            <Textarea id="about" className='mb-2' maxLength='200' />
+                            <p className='text-gray-500 text-xs'>200 Char reamining</p>                                
+                        </div>                                                                          
+                        <Button type="submit" >Send</Button>
+                    </form>
+                </Modal.Body>
+            </Modal>           
         </Card>
       );    
 }
